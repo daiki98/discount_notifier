@@ -1,16 +1,9 @@
+import datetime
 import requests
-from bs4 import BeautifulSoup
-import pandas as pd
-from datetime import datetime
 from time import sleep
 
-from get_api_token import get_api_token
-
-# https://www.networkinghowtos.com/howto/common-user-agent-list/
-HEADERS = ({'User-Agent':
-'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
-'Accept-Language': 'en-US, en;q=0.5'})
-
+import pandas as pd
+import bs4 as BeautifulSoup
 
 
 class Scraper:
@@ -82,21 +75,4 @@ class Scraper:
 
             sleep(interval_hours*1*1)
             print(f"インターバル{interval}終了")
-    
-    def send_line_notify(self, notification_message):
-        """LINEに通知を送信する
-
-        Args:
-            notification_message (string): 通知メッセージ
-        """
-        line_notify_token = get_api_token()
-        line_notify_api = 'https://notify-api.line.me/api/notify'
-        headers = {'Authorization': f'Bearer {line_notify_token}'}
-        data = {'message': f'message: {notification_message}'}
-        requests.post(line_notify_api, headers = headers, data = data)
-
-if __name__ == "__main__":
-    main()
-
-scraper = Scraper('trackers/TRACKER_PRODUCTS.csv')
-scraper.get_price()
+ 
