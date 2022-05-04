@@ -31,7 +31,7 @@ title = soup.find(id='productTitle').get_text().strip()
 try:
     price = float(soup.find(id='price').get_text().replace('¥', '').replace(',', '').strip())
 except:
-    # ドルで取得
+    # this part gets the price in dollars from amazon.com store
     try:
         price = float(soup.find(id='newBuyBoxPrice').get_text().replace('$', '').replace(',', '').strip())
     except:

@@ -4,6 +4,9 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from datetime import datetime
 from time import sleep
+from selectorlib import Extractor
+import json
+import html
 
 
 # https://www.networkinghowtos.com/howto/common-user-agent-list/
@@ -14,6 +17,10 @@ HEADERS = ({'User-Agent':
 # CSVファイルをインポートし、URLを取得
 prod_tracker = pd.read_csv('trackers/TRACKER_PRODUCTS.csv', encoding='unicode-escape')
 prod_tracker_URLS = prod_tracker.url
+
+# 抽出したい要素をyamlファイルから読み込む
+# extractor = Extractor.from_yaml_file('trackers/selectors.yml')
+# print(extractor.extract())
 
 # URLをフェッチ
 page = requests.get(prod_tracker_URLS[0], headers=HEADERS)
@@ -31,7 +38,7 @@ title = soup.find(id='productTitle').get_text().strip()
 try:
     price = float(soup.find(id='price').get_text().replace('¥', '').replace(',', '').strip())
 except:
-    # ドルで取得
+    # this part gets the price in dollars from amazon.com store
     try:
         price = float(soup.find(id='newBuyBoxPrice').get_text().replace('$', '').replace(',', '').strip())
     except:
