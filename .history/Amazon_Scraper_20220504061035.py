@@ -15,9 +15,9 @@ class Scraper:
     def __init__(self, path_to_csv):
         self.urls = path_to_csv
         
-    def get_price(self):
+    def find_product(self):
     # CSVファイルをインポートし、URLを取得
-        prod_tracker = pd.read_csv(self.urls, encoding='unicode-escape')
+        prod_tracker = pd.read_csv('trackers/TRACKER_PRODUCTS.csv', encoding='unicode-escape')
         prod_tracker_URLS = prod_tracker.url
 
     # URLをフェッチ
@@ -40,8 +40,6 @@ class Scraper:
             except:
                 print('Failed to get price')
                 price = ''
-        return price
+        print(price)
            
 
-scraper = Scraper('trackers/TRACKER_PRODUCTS.csv')
-print(scraper.get_price())

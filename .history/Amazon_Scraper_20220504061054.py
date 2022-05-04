@@ -17,7 +17,7 @@ class Scraper:
         
     def get_price(self):
     # CSVファイルをインポートし、URLを取得
-        prod_tracker = pd.read_csv(self.urls, encoding='unicode-escape')
+        prod_tracker = pd.read_csv('trackers/TRACKER_PRODUCTS.csv', encoding='unicode-escape')
         prod_tracker_URLS = prod_tracker.url
 
     # URLをフェッチ
@@ -43,5 +43,3 @@ class Scraper:
         return price
            
 
-scraper = Scraper('trackers/TRACKER_PRODUCTS.csv')
-print(scraper.get_price())

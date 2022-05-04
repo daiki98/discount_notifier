@@ -43,5 +43,3 @@ class Scraper:
         return price
            
 
-scraper = Scraper('trackers/TRACKER_PRODUCTS.csv')
-print(scraper.get_price())

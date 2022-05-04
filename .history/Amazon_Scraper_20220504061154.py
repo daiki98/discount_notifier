@@ -44,4 +44,3 @@ class Scraper:
            
 
 scraper = Scraper('trackers/TRACKER_PRODUCTS.csv')
-print(scraper.get_price())
