@@ -58,4 +58,3 @@ except:
     except:
         print('Failed to get price')
         price = ''
-print(price)

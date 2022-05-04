@@ -29,7 +29,7 @@ HEADERS = ({'User-Agent':
 # }
 
 # CSVファイルをインポートし、URLを取得
-prod_tracker = pd.read_csv('trackers/TRACKER_PRODUCTS.csv', encoding='unicode-escape')
+prod_tracker = pd.read_csv('trackers/TRACKER_PRODUCTS.csv', encoding='unicode-escape', sep='\t')
 prod_tracker_URLS = prod_tracker.url
 
 # 抽出したい要素をyamlファイルから読み込む
@@ -47,15 +47,28 @@ soup = BeautifulSoup(page.content, 'lxml')
 # 商品名
 title = soup.find(id='productTitle').get_text().strip()
 
-
-# 商品の価格が取得できなかった場合のクラッシュを防ぐ
-try:
-    price = float(soup.find(id='price').get_text().replace('¥', '').replace(',', '').strip())
-except:
-    # this part gets the price in dollars from amazon.com store
-    try:
-        price = float(soup.find(id='newBuyBoxPrice').get_text().replace('$', '').replace(',', '').strip())
-    except:
-        print('Failed to get price')
-        price = ''
+# to prevent script from crashing when there isn't a price for the product
+price = float(soup.find(id='price').get_text().replace('$', '').replace('￥', '').replace(',', '.').strip())
+# decimal_point = price.index('.')
+# price = price[:price.index('.')]
+order = 1
+# price = soup.select(f".widgetId\=search-results_{order}, .s-price-instructions-style, .a-price-whole")
+# price = soup.find("span", {"class":"a-price"}, {"class": "a-price-whole"})
 print(price)
+# try:
+#     price = float(soup.find(id='priceblock_ourprice').get_text().replace('.', '').replace('€', '').replace(',', '.').strip())
+# except:
+#     # this part gets the price in dollars from amazon.com store
+#     try:
+#         price = float(soup.find(id='priceblock_saleprice').get_text().replace('$', '').replace(',', '').strip())
+#     except:
+#         print('fail')
+#         price = ''
+# 商品の価格が取得できなかった場合のクラッシュを防ぐ
+# try:
+# price = soup.find(id='priceblock_ourprice').get_text().strip()
+# print(page.content)
+# print(price)
+# except:
+#     print('Failed to get price')
+#     price = ''

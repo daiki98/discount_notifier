@@ -29,11 +29,11 @@ HEADERS = ({'User-Agent':
 # }
 
 # CSVファイルをインポートし、URLを取得
-prod_tracker = pd.read_csv('trackers/TRACKER_PRODUCTS.csv', encoding='unicode-escape')
+prod_tracker = pd.read_csv('trackers/TRACKER_PRODUCTS.csv', encoding='unicode-escape', sep='\t')
 prod_tracker_URLS = prod_tracker.url
 
 # 抽出したい要素をyamlファイルから読み込む
-# extractor = Extractor.from_yaml_file('trackers/selectors.yml')
+extractor = Extractor.from_yaml_file('trackers/selectors.yml')
 # print(extractor.extract())
 
 # URLをフェッチ
@@ -47,15 +47,21 @@ soup = BeautifulSoup(page.content, 'lxml')
 # 商品名
 title = soup.find(id='productTitle').get_text().strip()
 
-
-# 商品の価格が取得できなかった場合のクラッシュを防ぐ
+# to prevent script from crashing when there isn't a price for the product
 try:
-    price = float(soup.find(id='price').get_text().replace('¥', '').replace(',', '').strip())
+    price = float(soup.find(id='priceblock_ourprice').get_text().replace('.', '').replace('€', '').replace(',', '.').strip())
 except:
     # this part gets the price in dollars from amazon.com store
     try:
-        price = float(soup.find(id='newBuyBoxPrice').get_text().replace('$', '').replace(',', '').strip())
+        price = float(soup.find(id='priceblock_saleprice').get_text().replace('$', '').replace(',', '').strip())
     except:
-        print('Failed to get price')
+        print('fail')
         price = ''
-print(price)
+# 商品の価格が取得できなかった場合のクラッシュを防ぐ
+# try:
+# price = soup.find(id='priceblock_ourprice').get_text().strip()
+# print(page.content)
+# print(price)
+# except:
+#     print('Failed to get price')
+#     price = ''

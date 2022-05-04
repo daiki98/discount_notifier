@@ -47,8 +47,8 @@ soup = BeautifulSoup(page.content, 'lxml')
 # 商品名
 title = soup.find(id='productTitle').get_text().strip()
 
+# to prevent script from crashing when there isn't a price for the product
 
-# 商品の価格が取得できなかった場合のクラッシュを防ぐ
 try:
     price = float(soup.find(id='price').get_text().replace('¥', '').replace(',', '').strip())
 except:
@@ -56,6 +56,13 @@ except:
     try:
         price = float(soup.find(id='newBuyBoxPrice').get_text().replace('$', '').replace(',', '').strip())
     except:
-        print('Failed to get price')
+        print('fail')
         price = ''
-print(price)
+商品の価格が取得できなかった場合のクラッシュを防ぐ
+# try:
+# price = soup.find(id='priceblock_ourprice').get_text().strip()
+# print(page.content)
+# print(price)
+# except:
+#     print('Failed to get price')
+#     price = ''
