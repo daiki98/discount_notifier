@@ -55,8 +55,6 @@ class Scraper:
                     except:
                         print('Failed to get price')
                         price = ''
-                
-                # ログを保存
                 log = pd.DataFrame({'date': now.replace('h', ':').replace('m', ''),
                 'code': prod_tracker.code[x],
                 'url': url,
@@ -70,21 +68,19 @@ class Scraper:
                         print('===========Send notification===============')
                 except:
                     pass
-
-                # ログを集計
-                tracker_log = pd.concat([tracker_log ,log])
-                print(f'{prod_tracker.code[x]}のログを追加\n\n')
-                print(tracker_log)
-                sleep(3)
-
+                tracker_log.append(log)
+                print(f'{title}のログを追加')
             interval += 1
 
-            sleep(interval_hours*1*1)
-            print(f"インターバル{interval}終了")
-
-
+        return price
 
                 
+
+        # # URLをフェッチ
+        # page = requests.get(prod_tracker_URLS[0], headers=HEADERS)
+
+        # # URL内の全ての情報を含むオブジェクトを生成
+        # soup = BeautifulSoup(page.content, 'lxml')
 
 
            

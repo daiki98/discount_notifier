@@ -75,14 +75,14 @@ class Scraper:
                 tracker_log = pd.concat([tracker_log ,log])
                 print(f'{prod_tracker.code[x]}のログを追加\n\n')
                 print(tracker_log)
-                sleep(3)
+                sleep(5)
 
             interval += 1
 
             sleep(interval_hours*1*1)
             print(f"インターバル{interval}終了")
 
-
+        return price
 
                 
 
