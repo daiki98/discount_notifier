@@ -15,10 +15,10 @@ prod_tracker = pd.read_csv('trackers/TRACKER_PRODUCTS.csv', encoding='unicode-es
 prod_tracker_URLS = prod_tracker.url
 
 # URLをフェッチ
-page = requests.get(prod_tracker_URLS[0], headers=HEADERS)
+page = requests.get(prod_tracker_URLS[0], header=HEADERS)
+print(page)
 
 # URL内の全ての情報を含むオブジェクトを生成
-soup = BeautifulSoup(page.content, 'lxml')
-print(soup)
+# soup = BeautifulSoup(page.content, features='lxml')
 
 

@@ -18,7 +18,7 @@ prod_tracker_URLS = prod_tracker.url
 page = requests.get(prod_tracker_URLS[0], headers=HEADERS)
 
 # URL内の全ての情報を含むオブジェクトを生成
-soup = BeautifulSoup(page.content, 'lxml')
+soup = BeautifulSoup(page.content, features='json')
 print(soup)
 
 

@@ -16,9 +16,10 @@ prod_tracker_URLS = prod_tracker.url
 
 # URLをフェッチ
 page = requests.get(prod_tracker_URLS[0], headers=HEADERS)
+print(page)
 
 # URL内の全ての情報を含むオブジェクトを生成
-soup = BeautifulSoup(page.content, 'lxml')
+soup = BeautifulSoup(page.content, features='lxml')
 print(soup)
 
 
