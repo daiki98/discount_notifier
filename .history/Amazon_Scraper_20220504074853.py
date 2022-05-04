@@ -6,12 +6,11 @@ from time import sleep
 
 from get_api_token import get_api_token
 
+
 # https://www.networkinghowtos.com/howto/common-user-agent-list/
 HEADERS = ({'User-Agent':
 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
 'Accept-Language': 'en-US, en;q=0.5'})
-
-
 
 class Scraper:
     def __init__(self, path_to_csv):
@@ -95,8 +94,11 @@ class Scraper:
         data = {'message': f'message: {notification_message}'}
         requests.post(line_notify_api, headers = headers, data = data)
 
-if __name__ == "__main__":
-    main()
+
+                
+
+
+           
 
 scraper = Scraper('trackers/TRACKER_PRODUCTS.csv')
-scraper.get_price()
+print(scraper.get_price())
