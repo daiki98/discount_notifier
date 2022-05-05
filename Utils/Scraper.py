@@ -60,7 +60,7 @@ class Scraper:
                 
                 # ログを保存
                 log = pd.DataFrame({'date': now.replace('h', ':').replace('m', ''),
-                'code': prod_tracker.code[x],
+                'name': prod_tracker.name[x],
                 'url': url,
                 'title': title,
                 'buy_below': prod_tracker.buy_below[x],
@@ -76,7 +76,7 @@ class Scraper:
 
                 # ログを集計
                 tracker_log = pd.concat([tracker_log ,log])
-                print(f'{prod_tracker.code[x]}のログを追加\n\n')
+                print(f'{prod_tracker.name[x]}のログを追加\n\n')
                 print(tracker_log)
                 sleep(3)
 
