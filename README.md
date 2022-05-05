@@ -9,7 +9,11 @@ git clone git@github.com:daiki98/discount_notifier.git
 
 Create directory named `trackers` then put `TRACKER_PRODUCTS.csv` like below.
 
-![TRECKER_PROCUDTS.csv](img/csv-file.png)
+| url | code | buy_below|
+|-----|------|----------|
+|https://...| Name of a product| price you want to get notification|
+|...|...|...|
+
 
 Your directory should be like this
 ```
