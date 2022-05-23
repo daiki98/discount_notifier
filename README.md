@@ -19,13 +19,14 @@ Your directory should be like this
 ```
 main.py
 README.md
-Utild
+src
     |__ Notifier.py
     |__ Scraper.py
+    |__ Logger.py
 trackers
     |__ TRACKER_PRODUCTS.csv
 scraping
-    |__ ...
+    |__ ...(venv)
 ```
 In csv file, url column contains url of the product you want to check the price. name contains the name of the product. It doesn't matter what kind of name is in Code col. Buy_below contains the price you want to get a notification.
 
