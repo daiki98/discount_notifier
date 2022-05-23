@@ -1,9 +1,12 @@
 import requests
 
+
 from src.get_api_token import get_api_token
 
 
 class Notifier:
+    """通知に関連する処理をまとめたクラスです
+    """
     def __init__(self):
         pass
 

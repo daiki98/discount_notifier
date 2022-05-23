@@ -20,9 +20,9 @@ Your directory should be like this
 main.py
 README.md
 src
-    |__ Notifier.py
-    |__ Scraper.py
-    |__ Logger.py
+    |__ notifier.py
+    |__ scraper.py
+    |__ logger.py
 trackers
     |__ TRACKER_PRODUCTS.csv
 scraping
