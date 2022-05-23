@@ -47,16 +47,14 @@ class Scraper:
                 # 商品名
                 title = soup.find(id='productTitle').get_text().strip()
 
-                # 商品の価格が取得できなかった場合のクラッシュを防ぐ
-                try:
+                # 商品の価格が取得できなかった場合をキャッチ
+                if soup.find(id='price'):
                     price = float(soup.find(id='price').get_text().replace('¥', '').replace(',', '').strip())
-                except:
-                    # ドルで取得
-                    try:
-                        price = float(soup.find(id='newBuyBoxPrice').get_text().replace('$', '').replace(',', '').strip())
-                    except:
-                        print('Failed to get price')
-                        price = ''
+
+                else:
+                    print('Failed to get price')
+                    price = ''
+
                 
                 # ログを保存
                 log = pd.DataFrame({'date': now.replace('h', ':').replace('m', ''),
@@ -65,14 +63,11 @@ class Scraper:
                 'title': title,
                 'buy_below': prod_tracker.buy_below[x],
                 'price': price}, index=[x])
+
                 # 価格が閾値より低いか確認
-                Notifier.send_line_notify(self, f'{title}が{price}で販売されています')
-                try:
-                    if price < prod_tracker.buy_below[x]:
-                        Notifier.send_line_notify(f'{title}が{price}で販売されています')
-                        pass
-                except:
-                    print('Failed to send message')
+                if price < prod_tracker.buy_below[x]:
+                    Notifier.send_line_notify(self, f'{title}が{price}で販売されています')
+
 
                 # ログを集計
                 tracker_log = pd.concat([tracker_log ,log])
