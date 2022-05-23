@@ -21,6 +21,7 @@ def main():
         
         sleep(3)
         print(f'インターバル{scraper.interval}終了')
+        print(f'次に実行されるのは{scraper.interval_hours}時間後です')
         scraper.interval += 1
         sleep(scraper.interval_hours*60*60)
 
